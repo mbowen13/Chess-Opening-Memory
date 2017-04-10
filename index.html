@@ -24,6 +24,7 @@
       
       <div id="board" style="width: 400px"></div>
       <input type="button" id="startPositionBtn" value="Start Position" />
+      <input type="button" id="savePositionBtn" value="Save Position" onclick="savePosition()"/>
     
     </div>
 
@@ -38,6 +39,7 @@
     };
     var board = ChessBoard('board', cfg);
     var currentPosition = [];
+    var positionArr = [];
     
     $('#startBtn').on('click', board.start);
     $('#clearBtn').on('click', board.clear);
@@ -58,9 +60,16 @@
       currentPosition.push(newPosition);
     };
     
+    function savePosition() {
+      positionArr.push(currentPosition);
+      currentPosition = [];
+      console.log("Position Arr: " + positionArr);
+      console.log("Current Position: " + currentPosition);
+    }
+    
 
     $('#startPositionBtn').on('click', board.start);
-    $('#startPositionBtn').on('click', board.start);
+    
     
     
     </script>
