@@ -28,8 +28,6 @@
     
     </div>
 
-
-    
     <script>
     
     var cfg = {
@@ -37,12 +35,15 @@
       position: 'start',
       onChange: onChange
     };
+    
     var board = ChessBoard('board', cfg);
     var currentPosition = [];
     var positionsObj = {};
     
+    
     $('#startBtn').on('click', board.start);
     $('#clearBtn').on('click', board.clear);
+    
     
     function loadStartingPosition() {
         var input = document.getElementById("loadFEN").value;
@@ -53,10 +54,7 @@
     
     
     function onChange(oldPos, newPos) {
-      console.log("Position changed:");
       var newPosition = ChessBoard.objToFen(newPos);
-      console.log("New position: " + newPosition);
-      console.log("--------------------");
       currentPosition.push(newPosition);
     };
     
@@ -64,14 +62,10 @@
       var id = prompt("Enter a name for this position");
       positionsObj[id] = currentPosition;
       currentPosition = [];
-      console.log("Positions Obj: " + positionsObj[id]);
-      console.log("Current Position: " + currentPosition);
     }
     
 
     $('#startPositionBtn').on('click', board.start);
-    
-    
     
     </script>
   </body>
