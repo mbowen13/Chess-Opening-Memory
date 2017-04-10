@@ -15,33 +15,55 @@
   </head>
   <body>
     <div class="container">
+      
+      <form id="form" onsubmit="return false;">
+        <input type="text" id="FEN" placeholder="Enter starting position"/>
+        <input type="submit" onclick="saveFEN();" />
+      </form>
+      
+      
       <div id="board" style="width: 400px"></div>
-      <input type="button" id="startBtn" value="Start" />
-      <input type="button" id="clearBtn" value="Clear" />
-      
-      <br>
-      
-    <form id="form" onsubmit="return false;">
-      <input type="text" id="FEN" placeholder="Enter FEN to load"/>
-      <input type="submit" onclick="saveFEN();" />
-    </form>
+      <input type="button" id="startPositionBtn" value="Start Position" />
+    
+    </div>
 
 
     
     <script>
     
     var board = ChessBoard('board');
+    var movArr = [];
     
-    
-    
-    
-    
+    $('#startBtn').on('click', board.start);
+    $('#clearBtn').on('click', board.clear);
     
     function saveFEN() {
         var input = document.getElementById("FEN").value;
         
         board.position(input);
+        console.log(ChessBoard.fenToObj(input));
     }  
+    
+    
+    function onChange(oldPos, newPos) {
+      console.log("Position changed:");
+      var newPosition = ChessBoard.objToFen(newPos);
+      console.log("New position: " + newPosition);
+      console.log("--------------------");
+      movArr.push(newPosition);
+      console.log(movArr);
+    };
+
+    var cfg = {
+      draggable: true,
+      position: 'start',
+      onChange: onChange
+    };
+    var board = ChessBoard('board', cfg);
+
+    $('#startPositionBtn').on('click', board.start);
+    $('#startPositionBtn').on('click', board.start);
+    
     
     </script>
   </body>
