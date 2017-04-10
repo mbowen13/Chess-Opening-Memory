@@ -39,7 +39,7 @@
     };
     var board = ChessBoard('board', cfg);
     var currentPosition = [];
-    var positionArr = [];
+    var positionsObj = {};
     
     $('#startBtn').on('click', board.start);
     $('#clearBtn').on('click', board.clear);
@@ -61,9 +61,10 @@
     };
     
     function savePosition() {
-      positionArr.push(currentPosition);
+      var id = prompt("Enter a name for this position");
+      positionsObj[id] = currentPosition;
       currentPosition = [];
-      console.log("Position Arr: " + positionArr);
+      console.log("Positions Obj: " + positionsObj[id]);
       console.log("Current Position: " + currentPosition);
     }
     
