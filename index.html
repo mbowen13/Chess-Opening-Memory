@@ -16,10 +16,12 @@
   <body>
     <div class="container">
       
+      <!-- Currently only supporting opening positions
       <form id="form" onsubmit="return false;">
         <input type="text" id="loadFEN" placeholder="Enter starting position"/>
         <input type="submit" onclick="loadStartingPosition();" />
       </form>
+    -->
       
       
       <div id="board" style="width: 400px"></div>
@@ -34,7 +36,7 @@
     var cfg = {
       draggable: true,
       position: 'start',
-      onChange: onChange
+      onDrop: onDrop
     };
     
     var board = ChessBoard('board', cfg);
@@ -45,26 +47,16 @@
     var currentTestingArr = [];
     
     
-    $('#startBtn').on('click', board.start);
-    $('#clearBtn').on('click', board.clear);
-    
-    
-    function loadStartingPosition() {
-        var input = document.getElementById("loadFEN").value;
-        
-        board.position(input);
-        console.log(ChessBoard.fenToObj(input));
-    }  
-    
-    function onChange(oldPos, newPos) {
+    function onDrop (source, target, piece, newPos, oldPos, orientation) {
       if (testing) {
         console.log("You played: " + ChessBoard.objToFen(newPos));
         console.log("The correct move is: " + currentTestingFEN(currentTestingArr));
         if ( ChessBoard.objToFen(newPos) !== currentTestingFEN(currentTestingArr) ) {
-          alert('That is incorrect');
+          alert('That is incorrect.Try again');
         } 
-        else if (currentTestingIndex == currentTestingArr.length -1) {
+        else if (currentTestingIndex == currentTestingArr.length - 1) {
           alert('Congratulations!');
+          testing = false;
         } else {
           currentTestingIndex++;
         }
@@ -78,17 +70,9 @@
       var id = prompt("Enter a name for this position");
       positionsObj[id] = currentPosition;
       currentPosition = [];
-      // board.clear; not working
     }
-    
-    /* Currently only openings are supposed as a starting position
-    function loadPositionFromSaved(position) {
-      board.position(position);
-    }
-    */
     
     function test(id) {
-      //loadPositionFromSaved(positionsObj[id][0]);
       console.log("Moveset: " + positionsObj[id]);
       testing = true;
       currentTestingArr = positionsObj[id];
@@ -100,6 +84,21 @@
     
 
     $('#startPositionBtn').on('click', board.start);
+    
+    
+    /* Currently only openings are supposed as a starting position
+    
+    function loadStartingPosition() {
+        var input = document.getElementById("loadFEN").value;
+        
+        board.position(input);
+        console.log(ChessBoard.fenToObj(input));
+    }  
+    
+    function loadPositionFromSaved(position) {
+      board.position(position);
+    }
+    */
     
     </script>
   </body>
