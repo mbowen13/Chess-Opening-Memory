@@ -25,6 +25,7 @@
       <div id="board" style="width: 400px"></div>
       <input type="button" id="startPositionBtn" value="Start Position" />
       <input type="button" id="savePositionBtn" value="Save Position" onclick="savePosition()"/>
+      <input type="button" id="testnBtn" value="Test" onclick="test('test')"/>  <!-- hardcord for now to test functionality -->
     
     </div>
 
@@ -39,6 +40,9 @@
     var board = ChessBoard('board', cfg);
     var currentPosition = [];
     var positionsObj = {};
+    var testing = false;
+    var currentTestingIndex = 0;
+    var currentTestingArr = [];
     
     
     $('#startBtn').on('click', board.start);
@@ -52,16 +56,43 @@
         console.log(ChessBoard.fenToObj(input));
     }  
     
-    
     function onChange(oldPos, newPos) {
-      var newPosition = ChessBoard.objToFen(newPos);
-      currentPosition.push(newPosition);
+      if (testing) {
+        console.log("You played: " + ChessBoard.objToFen(newPos));
+        console.log("The correct move is: " + currentTestingFEN(currentTestingArr));
+        if ( ChessBoard.objToFen(newPos) !== currentTestingFEN(currentTestingArr) ) {
+          alert('That is incorrect');
+        } else {
+          currentTestingIndex++;
+        }
+      } else {
+        var newPosition = ChessBoard.objToFen(newPos);
+        currentPosition.push(newPosition);
+      }
     };
     
     function savePosition() {
       var id = prompt("Enter a name for this position");
       positionsObj[id] = currentPosition;
       currentPosition = [];
+      // board.clear; not working
+    }
+    
+    /* Currently only openings are supposed as a starting position
+    function loadPositionFromSaved(position) {
+      board.position(position);
+    }
+    */
+    
+    function test(id) {
+      //loadPositionFromSaved(positionsObj[id][0]);
+      console.log("Moveset: " + positionsObj[id]);
+      testing = true;
+      currentTestingArr = positionsObj[id];
+    }
+    
+    function currentTestingFEN (arr) {
+      return arr[currentTestingIndex];
     }
     
 
@@ -70,3 +101,17 @@
     </script>
   </body>
 </html>
+
+
+
+<!-- 
+positonsObj = {
+  "test": [
+  0,
+  1,
+  2
+  ]
+}
+
+onChange check to see if newPos is equal to current iteration in positionsObj
+Keep track of current iteration in positionsObj. It iterates on OnChange -->
