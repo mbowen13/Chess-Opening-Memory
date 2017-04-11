@@ -62,6 +62,9 @@
         console.log("The correct move is: " + currentTestingFEN(currentTestingArr));
         if ( ChessBoard.objToFen(newPos) !== currentTestingFEN(currentTestingArr) ) {
           alert('That is incorrect');
+        } 
+        else if (currentTestingIndex == currentTestingArr.length -1) {
+          alert('Congratulations!');
         } else {
           currentTestingIndex++;
         }
