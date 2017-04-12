@@ -31,7 +31,7 @@
       <input type="button" id="testnBtn" value="Test" onclick="test('test')"/>  <!-- hardcord for now to test functionality -->
       
       
-      <form>
+      <form id="loadTestingPosition">
         <div class="form-group">
           <label for="exampleSelect1">Select Opening to Load</label>
           <select class="form-control" id="exampleSelect1">
@@ -87,9 +87,10 @@
       positionsObj[id] = currentPosition;
       currentPosition = [];
       board.position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
-      $.each(positionsObj, function( key, value ) { 
-        console.log(key + ": " + value);
-      });
+      // $.each(positionsObj, function( key, value ) { 
+      //   console.log(key + ": " + value);
+      // });
+      $('#loadTestingPosition').show();
     }
     
     function test(id) {
@@ -104,6 +105,7 @@
     
 
     $('#startPositionBtn').on('click', board.start);
+    $('#loadTestingPosition').hide();
     
     
     
