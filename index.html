@@ -12,6 +12,7 @@
     
     <script src="./js/chessboard-0.3.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </head>
   <body>
     <div class="container">
@@ -28,6 +29,21 @@
       <input type="button" id="startPositionBtn" value="Start Position" />
       <input type="button" id="savePositionBtn" value="Save Position" onclick="savePosition()"/>
       <input type="button" id="testnBtn" value="Test" onclick="test('test')"/>  <!-- hardcord for now to test functionality -->
+      
+      
+      <form>
+        <div class="form-group">
+          <label for="exampleSelect1">Select Opening to Load</label>
+          <select class="form-control" id="exampleSelect1">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     
     </div>
 
@@ -71,7 +87,9 @@
       positionsObj[id] = currentPosition;
       currentPosition = [];
       board.position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
-      console.log(positionsObj);
+      $.each(positionsObj, function( key, value ) { 
+        console.log(key + ": " + value);
+      });
     }
     
     function test(id) {
@@ -86,6 +104,7 @@
     
 
     $('#startPositionBtn').on('click', board.start);
+    
     
     
     /* Currently only openings are supposed as a starting position
