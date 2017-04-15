@@ -31,15 +31,10 @@
       <input type="button" id="testnBtn" value="Test" onclick="test('test')"/>  <!-- hardcord for now to test functionality -->
       
       
-      <form id="loadTestingPosition">
+      <form id="loadTestingPositionForm">
         <div class="form-group">
           <label for="exampleSelect1">Select Opening to Load</label>
-          <select class="form-control" id="exampleSelect1">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+          <select class="form-control" id="loadTestingPositionOptions">
           </select>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -83,14 +78,14 @@
     };
     
     function savePosition() {
-      var id = prompt("Enter a name for this position");
-      positionsObj[id] = currentPosition;
+      var key = prompt("Enter a name for this position");
+      positionsObj[key] = currentPosition;
       currentPosition = [];
       board.position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
-      // $.each(positionsObj, function( key, value ) { 
-      //   console.log(key + ": " + value);
-      // });
-      $('#loadTestingPosition').show();
+      
+      $('#loadTestingPositionForm').show();
+      
+      $('select').append('<option value="' + key + '">' + key + '</option>');
     }
     
     function test(id) {
@@ -105,7 +100,8 @@
     
 
     $('#startPositionBtn').on('click', board.start);
-    $('#loadTestingPosition').hide();
+    $('#loadTestingPositionForm').hide();
+
     
     
     
