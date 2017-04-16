@@ -28,16 +28,16 @@
       <div id="board" style="width: 400px"></div>
       <input type="button" id="startPositionBtn" value="Start Position" />
       <input type="button" id="savePositionBtn" value="Save Position" onclick="savePosition()"/>
-      <input type="button" id="testnBtn" value="Test" onclick="test('test')"/>  <!-- hardcord for now to test functionality -->
+      <input type="button" id="testnBtn" value="Test" onclick="test(currentKey)"/>  <!-- hardcord for now to test functionality -->
       
       
-      <form id="loadTestingPositionForm">
+      <form id="loadTestingPositionForm" onsubmit="return false">
         <div class="form-group">
-          <label for="exampleSelect1">Select Opening to Load</label>
-          <select class="form-control" id="loadTestingPositionOptions">
+          <p id="pElem"></p>
+          <select class="form-control" id="selectPosition">
           </select>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" onclick="loadPosition()">Submit</button>
       </form>
     
     </div>
@@ -56,6 +56,7 @@
     var testing = false;
     var currentTestingIndex = 0;
     var currentTestingArr = [];
+    var currentKey = '';
     
     
     function onDrop (source, target, piece, newPos, oldPos, orientation) {
@@ -81,11 +82,19 @@
       var key = prompt("Enter a name for this position");
       positionsObj[key] = currentPosition;
       currentPosition = [];
+      
+      // starting Chess position
       board.position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
       
       $('#loadTestingPositionForm').show();
       
       $('select').append('<option value="' + key + '">' + key + '</option>');
+    }
+    
+    function loadPosition() {
+      var index = selected.selectedIndex;
+      var key = selected[index].value;
+      currentKey = key;
     }
     
     function test(id) {
@@ -101,6 +110,17 @@
 
     $('#startPositionBtn').on('click', board.start);
     $('#loadTestingPositionForm').hide();
+    
+    var selected = document.getElementById('selectPosition');
+    
+    
+    // var selectedP = document.getElementById('pElem');
+    
+    // selected.addEventListener('change', function() {
+    //   var index = selected.selectedIndex;
+    //   selectedP.innerHTML = 'selected value: ' + selected[index].value;
+    // });
+
 
     
     
