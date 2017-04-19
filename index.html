@@ -81,15 +81,19 @@
     
     function savePosition() {
       var key = prompt("Enter a name for this position");
-      positionsObj[key] = currentPosition;
-      currentPosition = [];
+      if ( key !== null && key !== '' ) {
+        positionsObj[key] = currentPosition;
+        currentPosition = [];
       
-      // starting Chess position
-      board.position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
-      
-      $('#loadTestingPositionForm').show();
-      
-      $('select').append('<option value="' + key + '">' + key + '</option>');
+        // starting Chess position
+        board.position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
+        
+        $('#loadTestingPositionForm').show();
+        
+        $('select').append('<option value="' + key + '">' + key + '</option>');
+      } else {
+        throw alert("You must enter a name for your position.");
+      }
     }
     
     function test() {
