@@ -63,10 +63,15 @@
     var startingBoardPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
     
     
+    $('#currentTestingLabel').hide();
+    $('#loadTestingPositionForm').hide();
+    $('#exitTestingBtn').hide();
+    
+    
     function onDrop (source, target, piece, newPos, oldPos, orientation) {
       if (testing) {
-        console.log("You played: " + ChessBoard.objToFen(newPos));
-        console.log("The correct move is: " + currentTestingArr[currentTestingIndex]);
+        // console.log("You played: " + ChessBoard.objToFen(newPos));
+        // console.log("The correct move is: " + currentTestingArr[currentTestingIndex]);
         if ( ChessBoard.objToFen(newPos) !== currentTestingArr[currentTestingIndex]) {
           alert('That is incorrect.Try again');
           return 'snapback';
@@ -89,7 +94,6 @@
         positionsObj[key] = currentPosition;
         currentPosition = [];
       
-        // starting Chess position
         board.position(startingBoardPosition);
         
         $('#loadTestingPositionForm').show();
@@ -109,7 +113,7 @@
       var index = selected.selectedIndex;
       var key = selected[index].value;
       
-      console.log("positionsObj[key] " + positionsObj[key]);
+      // console.log("positionsObj[key] " + positionsObj[key]);
       
       board.position(startingBoardPosition);
       
@@ -119,9 +123,9 @@
       
       testing = true;
       currentTestingArr = positionsObj[key];
-      console.log('currentTestingArr: ' + currentTestingArr);
+      // console.log('currentTestingArr: ' + currentTestingArr);
       
-      $('#currentTestingLabel').html('<h2>Opening: ' + key + '</h2>');
+      $('#currentTestingLabel').html('<h3>Opening: ' + key + '</h3>');
       $('#currentTestingLabel').show();
     }
     
@@ -144,11 +148,6 @@
       
       exitTestingPosition();
     }
-
-
-    $('#currentTestingLabel').hide();
-    $('#loadTestingPositionForm').hide();
-    $('#exitTestingBtn').hide();
     
     
     /* Currently only openings are supposed as a starting position
