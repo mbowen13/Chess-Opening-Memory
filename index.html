@@ -30,7 +30,7 @@
         <div id="board" style="width: 400px"></div>
         
         <input type="button" id="exitTestingBtn" value="Exit Testing" onclick="exitTestingMode()" />
-        <input type="button" id="resetBtn" value="Reset" />
+        <input type="button" id="resetBtn" value="Reset" onclick="reset()"/>
         <input type="button" id="savePositionBtn" value="Save Position" onclick="savePosition()"/>
         
         <form id="loadTestingPositionForm" onsubmit="return false">
@@ -100,6 +100,11 @@
       }
     }
     
+    function reset() {
+      board.position(startingBoardPosition);
+      currentPosition = [];
+    }
+    
     function test() {
       var index = selected.selectedIndex;
       var key = selected[index].value;
@@ -141,7 +146,6 @@
     }
     
 
-    $('#resetBtn').on('click', board.start);
     $('#currentTestingLabel').hide();
     $('#loadTestingPositionForm').hide();
     $('#exitTestingBtn').hide();
