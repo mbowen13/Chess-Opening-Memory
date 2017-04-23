@@ -8,6 +8,7 @@
     <title>Chess app</title>
     
     <link rel="stylesheet" href="./css/chessboard-0.3.0.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     
     <script src="./js/chessboard-0.3.0.min.js"></script>
@@ -24,11 +25,15 @@
       </form>
     -->
       
-      <div id="currentTestingLabel"></div>
       
-      <div id="board" style="width: 400px"></div>
-      <input type="button" id="startPositionBtn" value="Reset" />
-      <input type="button" id="savePositionBtn" value="Save Position" onclick="savePosition()"/>
+      <div class="row">
+        <div id="currentTestingLabel"></div>
+        
+        <div id="board" style="width: 400px"></div>
+        
+        <input type="button" id="resetBtn" value="Reset" />
+        <input type="button" id="savePositionBtn" value="Save Position" onclick="savePosition()"/>
+      </div>
       
       
       <form id="loadTestingPositionForm" onsubmit="return false">
@@ -57,6 +62,7 @@
     var currentTestingIndex = 0;
     var currentTestingArr = [];
     var selected = document.getElementById('selectPosition');
+    var startingBoardPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
     
     
     function onDrop (source, target, piece, newPos, oldPos, orientation) {
@@ -70,6 +76,10 @@
           alert('Congratulations!');
           testing = false;
           $('#currentTestingLabel').hide();
+          // reset board
+          if (!testing) {
+            board.destroy;
+          }
         } else {
           currentTestingIndex++;
         }
@@ -86,7 +96,7 @@
         currentPosition = [];
       
         // starting Chess position
-        board.position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
+        board.position(startingBoardPosition);
         
         $('#loadTestingPositionForm').show();
         
@@ -102,6 +112,8 @@
       
       console.log("Moveset: " + positionsObj[key]);
       
+      board.position(startingBoardPosition);
+      
       testing = true;
       currentTestingArr = positionsObj[key];
       
@@ -114,7 +126,7 @@
     }
     
 
-    $('#startPositionBtn').on('click', board.start);
+    $('#resetBtn').on('click', board.start);
     $('#currentTestingLabel').hide();
     $('#loadTestingPositionForm').hide();
     
