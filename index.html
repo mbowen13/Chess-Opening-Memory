@@ -50,7 +50,7 @@
     var cfg = {
       draggable: true,
       position: 'start',
-      onDrop: onDrop
+      onDrop: onDrop,
     };
     
     var board = ChessBoard('board', cfg);
@@ -120,9 +120,9 @@
     }
     
     function exitTestingPosition() {
-      testing = false;
-      
       $('#currentTestingLabel').hide();
+      
+      testing = false;
     }
     
     function exitTestingMode() {
@@ -130,6 +130,7 @@
       $('#savePositionBtn').show();
       $('#exitTestingBtn').hide();
       
+      currentPosition = [];
       board.position(startingBoardPosition);
       
       exitTestingPosition();
