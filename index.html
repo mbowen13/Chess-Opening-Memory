@@ -9,14 +9,12 @@
     
     <link rel="stylesheet" href="./css/chessboard-0.3.0.min.css">
     <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     
     <script src="./js/chessboard-0.3.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </head>
   <body>
-    <div class="container">
+    <div class="wrapper">
       
       <!-- Currently only supporting opening positions
       <form id="form" onsubmit="return false;">
@@ -26,24 +24,24 @@
     -->
       
       
-      <div class="row">
+      <div class="board-wrapper">
         <div id="currentTestingLabel"></div>
         
         <div id="board" style="width: 400px"></div>
         
+        <input type="button" id="exitTestingBtn" value="Exit Testing" onclick="exitTestingMode()" />
         <input type="button" id="resetBtn" value="Reset" />
         <input type="button" id="savePositionBtn" value="Save Position" onclick="savePosition()"/>
+        
+        <form id="loadTestingPositionForm" onsubmit="return false">
+          <div class="form-group">
+            <label>Select an opening to test</label>
+            <select class="form-control" id="selectPosition">
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary" onclick="test()">Test</button>
+        </form>
       </div>
-      
-      
-      <form id="loadTestingPositionForm" onsubmit="return false">
-        <div class="form-group">
-          <label>Select an opening to test</label>
-          <select class="form-control" id="selectPosition">
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary" onclick="test()">Test</button>
-      </form>
     
     </div>
 
@@ -74,12 +72,7 @@
         } 
         else if (currentTestingIndex == currentTestingArr.length - 1) {
           alert('Congratulations!');
-          testing = false;
-          $('#currentTestingLabel').hide();
-          // reset board
-          if (!testing) {
-            board.destroy;
-          }
+          exitTestingPosition();
         } else {
           currentTestingIndex++;
         }
@@ -114,11 +107,29 @@
       
       board.position(startingBoardPosition);
       
+      $('#resetBtn').hide();
+      $('#savePositionBtn').hide();
+      $('#exitTestingBtn').show();
+      
       testing = true;
       currentTestingArr = positionsObj[key];
       
       $('#currentTestingLabel').html('Opening: ' + key);
       $('#currentTestingLabel').show();
+    }
+    
+    function exitTestingPosition() {
+      testing = false;
+      
+      $('#currentTestingLabel').hide();
+    }
+    
+    function exitTestingMode() {
+      $('#resetBtn').show();
+      $('#savePositionBtn').show();
+      $('#exitTestingBtn').hide();
+      
+      exitTestingPosition();
     }
     
     function currentTestingFEN (arr) {
@@ -129,6 +140,7 @@
     $('#resetBtn').on('click', board.start);
     $('#currentTestingLabel').hide();
     $('#loadTestingPositionForm').hide();
+    $('#exitTestingBtn').hide();
     
     
     /* Currently only openings are supposed as a starting position
