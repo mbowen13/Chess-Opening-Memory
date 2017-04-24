@@ -7,6 +7,7 @@
  *
  * Date: 10 Aug 2013
  */
+const $ = require('jquery');
 
 // start anonymous scope
 ;(function() {
