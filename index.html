@@ -22,7 +22,11 @@
       
       <input type="button" id="exitTestingBtn" value="Exit Testing" onclick="exitTestingMode()" />
       <input type="button" id="resetBtn" value="Reset" onclick="reset()"/>
-      <input type="button" id="savePositionBtn" value="Save Position" onclick="savePosition()"/>
+      <form>
+        <label>Name Your Position</label>
+        <input type="text" id="positionName" />
+        <input type="button" id="savePositionBtn" value="Save Position" onclick="savePosition()"/>
+      </form>
       
       <form id="loadTestingPositionForm" onsubmit="return false">
         <div class="form-group">

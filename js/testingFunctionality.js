@@ -41,8 +41,12 @@ function onDrop (source, target, piece, newPos, oldPos, orientation) {
 };
 
 function savePosition() {
-  var key = prompt("Enter a name for this position");
-  if ( key !== null && key !== '' ) {
+  var positionName = document.getElementById('positionName').value;
+  var key = positionName;
+  
+  document.getElementById('positionName').value = "";
+  
+  if ( key !== null && key !== "" ) {
     positionsObj[key] = currentPosition;
     currentPosition = [];
   
