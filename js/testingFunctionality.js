@@ -22,8 +22,8 @@ $('#exitTestingBtn').hide();
 
 function onDrop (source, target, piece, newPos, oldPos, orientation) {
   if (testing) {
-    // console.log("You played: " + ChessBoard.objToFen(newPos));
-    // console.log("The correct move is: " + currentTestingArr[currentTestingIndex]);
+     console.log("You played: " + ChessBoard.objToFen(newPos));
+     console.log("The correct move is: " + currentTestingArr[currentTestingIndex]);
     if ( ChessBoard.objToFen(newPos) !== currentTestingArr[currentTestingIndex]) {
       alert('That is incorrect.Try again');
       return 'snapback';
@@ -47,7 +47,9 @@ function savePosition() {
   document.getElementById('positionName').value = "";
   
   if ( key !== null && key !== "" ) {
-    positionsObj[key] = currentPosition;
+    // positionsObj[key] = currentPosition;
+    localStorage.setItem(key, currentPosition);
+    
     currentPosition = [];
   
     board.position(startingBoardPosition);
@@ -78,7 +80,8 @@ function test() {
   $('#exitTestingBtn').show();
   
   testing = true;
-  currentTestingArr = positionsObj[key];
+   // currentTestingArr = positionsObj[key];
+  currentTestingArr = localStorage.getItem(key).split(',');
   // console.log('currentTestingArr: ' + currentTestingArr);
   
   $('#currentTestingLabel').html('<h3>Opening: ' + key + '</h3>');
