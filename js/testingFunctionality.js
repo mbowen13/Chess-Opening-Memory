@@ -19,6 +19,14 @@ $('#currentTestingLabel').hide();
 $('#loadTestingPositionForm').hide();
 $('#exitTestingBtn').hide();
 
+if ( localStorage.length > 0 ) {
+  Object.keys(localStorage).forEach( function(key) {
+    $('select').append('<option value="' + key + '">' + key + '</option>');
+  });
+  
+  $('#loadTestingPositionForm').show();
+}
+
 
 function onDrop (source, target, piece, newPos, oldPos, orientation) {
   if (testing) {
