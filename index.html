@@ -31,22 +31,14 @@
         <input type="button" id="savePositionBtn" value="Save Position" onclick="savePosition()"/>
       </form>
       
-      <form id="deleteForm" onsubmit="return false">
+      <form id="positionForm" onsubmit="return false">
         <div class="form-group">
-          <label>Select an opening to delete</label>
-          <select class="form-control" id="selectPosition">
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary" onclick="deleteOpening()">Delete</button>
-      </form>
-      
-      <form id="loadTestingPositionForm" onsubmit="return false">
-        <div class="form-group">
-          <label>Select an opening to test</label>
-          <select class="form-control" id="selectPosition">
+          <label>Select an opening</label>
+          <select id="selectPosition">
           </select>
         </div>
         <button type="submit" class="btn btn-primary" onclick="test()">Test</button>
+        <button type="submit" class="btn btn-primary" onclick="deleteOpening()">Delete</button>
       </form>
     </div>
   

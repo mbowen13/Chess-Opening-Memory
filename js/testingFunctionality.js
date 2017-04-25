@@ -16,7 +16,7 @@ var startingBoardPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
 
 $('#currentTestingLabel').hide();
-$('#loadTestingPositionForm').hide();
+$('#positionForm').hide();
 $('#exitTestingBtn').hide();
 $('#savePositionForm').hide();
 $('#resetBtn').hide();
@@ -25,7 +25,7 @@ $('#resetBtn').hide();
 if ( localStorage.length > 0 ) {
   listSavedOpenings();
   
-  $('#loadTestingPositionForm').show();
+  $('#positionForm').show();
 }
 
 function listSavedOpenings() {
@@ -79,7 +79,7 @@ function savePosition() {
     
       board.position(startingBoardPosition);
       
-      $('#loadTestingPositionForm').show();
+      $('#positionForm').show();
       
       $('select').append('<option value="' + key + '">' + key + '</option>');
     } else {
