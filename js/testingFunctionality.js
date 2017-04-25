@@ -30,7 +30,7 @@ if ( localStorage.length > 0 ) {
 }
 
 
-function onDrop (source, target, piece, newPos, oldPos, orientation) {
+function onDrop(source, target, piece, newPos, oldPos, orientation) {
   if (testing) {
      console.log("You played: " + ChessBoard.objToFen(newPos));
      console.log("The correct move is: " + currentTestingArr[currentTestingIndex]);
@@ -50,7 +50,7 @@ function onDrop (source, target, piece, newPos, oldPos, orientation) {
   }
 }
 
-function start () {
+function start() {
   $('#startBtn').hide();
   $('#savePositionForm').show();
   $('#resetBtn').show();
@@ -93,8 +93,6 @@ function test() {
   var index = selected.selectedIndex;
   var key = selected[index].value;
   
-  // console.log("positionsObj[key] " + positionsObj[key]);
-  
   board.position(startingBoardPosition);
   
   $('#resetBtn').hide();
@@ -103,9 +101,8 @@ function test() {
   $('#exitTestingBtn').show();
   
   testing = true;
-   // currentTestingArr = positionsObj[key];
+  
   currentTestingArr = localStorage.getItem(key).split(',');
-  // console.log('currentTestingArr: ' + currentTestingArr);
   
   $('#currentTestingLabel').html('<h3>Opening: ' + key + '</h3>');
   $('#currentTestingLabel').show();
