@@ -21,14 +21,20 @@ $('#exitTestingBtn').hide();
 $('#savePositionForm').hide();
 $('#resetBtn').hide();
 
+
 if ( localStorage.length > 0 ) {
-  Object.keys(localStorage).forEach( function(key) {
-    $('select').append('<option value="' + key + '">' + key + '</option>');
-  });
+  listSavedOpenings();
   
   $('#loadTestingPositionForm').show();
 }
 
+function listSavedOpenings() {
+  $('select').html('');
+  
+  Object.keys(localStorage).forEach( function(key) {
+    $('select').append('<option value="' + key + '">' + key + '</option>');
+  });
+}
 
 function onDrop(source, target, piece, newPos, oldPos, orientation) {
   if (testing) {
@@ -107,6 +113,16 @@ function test() {
   $('#currentTestingLabel').html('<h3>Opening: ' + key + '</h3>');
   $('#currentTestingLabel').show();
 }
+
+function deleteOpening() {
+  let index = selected.selectedIndex;
+  let key = selected[index].value;
+  
+  localStorage.removeItem(key);
+  
+  listSavedOpenings();
+}
+
 
 function exitTestingPosition() {
   $('#currentTestingLabel').hide();
