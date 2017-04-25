@@ -16,16 +16,16 @@ var startingBoardPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
 
 $('#currentTestingLabel').hide();
+$('#saveForm').hide();
 $('#positionForm').hide();
 $('#exitTestingBtn').hide();
-$('#savePositionForm').hide();
 $('#resetBtn').hide();
+$('#testBtn').hide();
+$('#deleteBtn').hide();
 
 
 if ( localStorage.length > 0 ) {
   listSavedOpenings();
-  
-  $('#positionForm').show();
 }
 
 function listSavedOpenings() {
@@ -57,13 +57,19 @@ function onDrop(source, target, piece, newPos, oldPos, orientation) {
 }
 
 function start() {
-  $('#startBtn').hide();
-  $('#savePositionForm').show();
+  $('#currentTestingLabel').hide();
+  $('#saveForm').show();
+  $('#positionForm').hide();
+  $('#exitTestingBtn').hide();
   $('#resetBtn').show();
+  $('#startBtn').hide();
+  $('#deleteOpeningBtn').show();
+  $('#testOpeningBtn').show();
+  $('#testBtn').hide();
+  $('#deleteBtn').hide();
   
   board.position(startingBoardPosition);
 }
-
 
 function savePosition() {
   var positionName = document.getElementById('positionName').value;
@@ -79,8 +85,6 @@ function savePosition() {
     
       board.position(startingBoardPosition);
       
-      $('#positionForm').show();
-      
       $('select').append('<option value="' + key + '">' + key + '</option>');
     } else {
       throw alert("That name already exists.");
@@ -95,23 +99,17 @@ function reset() {
   currentPosition = [];
 }
 
-function test() {
-  var index = selected.selectedIndex;
-  var key = selected[index].value;
-  
-  board.position(startingBoardPosition);
-  
+function deleteOpeningBtnOnClick() {
+  $('#currentTestingLabel').hide();
+  $('#saveForm').hide();
+  $('#positionForm').show();
+  $('#exitTestingBtn').hide();
   $('#resetBtn').hide();
-  $('#savePositionForm').hide();
-  $('#startBtn').hide();
-  $('#exitTestingBtn').show();
-  
-  testing = true;
-  
-  currentTestingArr = localStorage.getItem(key).split(',');
-  
-  $('#currentTestingLabel').html('<h3>Opening: ' + key + '</h3>');
-  $('#currentTestingLabel').show();
+  $('#startBtn').show();
+  $('#deleteOpeningBtn').hide();
+  $('#testOpeningBtn').show();
+  $('#testBtn').hide();
+  $('#deleteBtn').show();
 }
 
 function deleteOpening() {
@@ -123,6 +121,43 @@ function deleteOpening() {
   listSavedOpenings();
 }
 
+function testOpeningBtnOnClick() {
+  $('#currentTestingLabel').hide();
+  $('#saveForm').hide();
+  $('#positionForm').show();
+  $('#exitTestingBtn').hide();
+  $('#resetBtn').hide();
+  $('#startBtn').show();
+  $('#deleteOpeningBtn').show();
+  $('#testOpeningBtn').hide();
+  $('#testBtn').show();
+  $('#deleteBtn').hide();
+}
+
+function test() {
+  var index = selected.selectedIndex;
+  var key = selected[index].value;
+  
+  board.position(startingBoardPosition);
+  
+  $('#currentTestingLabel').hide();
+  $('#saveForm').hide();
+  $('#positionForm').show();
+  $('#exitTestingBtn').show();
+  $('#resetBtn').hide();
+  $('#startBtn').hide();
+  $('#deleteOpeningBtn').hide();
+  $('#testOpeningBtn').hide();
+  $('#testBtn').show();
+  $('#deleteBtn').hide();
+  
+  testing = true;
+  
+  currentTestingArr = localStorage.getItem(key).split(',');
+  
+  $('#currentTestingLabel').html('<h3>Opening: ' + key + '</h3>');
+  $('#currentTestingLabel').show();
+}
 
 function exitTestingPosition() {
   $('#currentTestingLabel').hide();
@@ -134,11 +169,35 @@ function exitTestingPosition() {
 }
 
 function exitTestingMode() {
-  $('#startBtn').show();
+  $('#currentTestingLabel').hide();
+  $('#saveForm').hide();
+  $('#positionForm').hide();
   $('#exitTestingBtn').hide();
+  $('#resetBtn').hide();
+  $('#startBtn').show();
+  $('#deleteOpeningBtn').show();
+  $('#testOpeningBtn').show();
+  $('#testBtn').hide();
+  $('#deleteBtn').hide();
   
   currentPosition = [];
   board.position(startingBoardPosition);
   
   exitTestingPosition();
 }
+
+
+/*
+
+$('#currentTestingLabel').hide();
+$('#saveForm').hide();
+$('#positionForm').hide();
+$('#exitTestingBtn').hide();
+$('#resetBtn').hide();
+$('#startBtn').hide();
+$('#deleteOpeningBtn').hide();
+$('#testOpeningBtn').hide();
+$('#testBtn').hide();
+$('#deleteBtn').hide();
+
+*/

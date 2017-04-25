@@ -23,9 +23,10 @@
       <input type="button" id="exitTestingBtn" value="Exit Testing" onclick="exitTestingMode()" />
       <input type="button" id="resetBtn" value="Reset" onclick="reset()"/>
       <input type="button" id="startBtn" value="Start New Opening" onclick="start()"/>
-      <input type="button" id="deleteBtn" value="Delete Opening" onclick="delete()"/>
+      <input type="button" id="deleteOpeningBtn" value="Delete Opening" onclick="deleteOpeningBtnOnClick()"/>
+      <input type="button" id="testOpeningBtn" value="Test Opening" onclick="testOpeningBtnOnClick()"/>
       
-      <form id="savePositionForm">
+      <form id="saveForm">
         <label>Name Your Position</label>
         <input type="text" id="positionName" />
         <input type="button" id="savePositionBtn" value="Save Position" onclick="savePosition()"/>
@@ -37,8 +38,8 @@
           <select id="selectPosition">
           </select>
         </div>
-        <button type="submit" class="btn btn-primary" onclick="test()">Test</button>
-        <button type="submit" class="btn btn-primary" onclick="deleteOpening()">Delete</button>
+        <button type="submit" id="testBtn" onclick="test()">Test</button>
+        <button type="submit" id="deleteBtn" onclick="deleteOpening()">Delete</button>
       </form>
     </div>
   
