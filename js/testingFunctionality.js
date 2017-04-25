@@ -18,6 +18,8 @@ var startingBoardPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 $('#currentTestingLabel').hide();
 $('#loadTestingPositionForm').hide();
 $('#exitTestingBtn').hide();
+$('#savePositionForm').hide();
+$('#resetBtn').hide();
 
 if ( localStorage.length > 0 ) {
   Object.keys(localStorage).forEach( function(key) {
@@ -46,7 +48,16 @@ function onDrop (source, target, piece, newPos, oldPos, orientation) {
     var newPosition = ChessBoard.objToFen(newPos);
     currentPosition.push(newPosition);
   }
-};
+}
+
+function start () {
+  $('#startBtn').hide();
+  $('#savePositionForm').show();
+  $('#resetBtn').show();
+  
+  board.position(startingBoardPosition);
+}
+
 
 function savePosition() {
   var positionName = document.getElementById('positionName').value;
@@ -84,7 +95,8 @@ function test() {
   board.position(startingBoardPosition);
   
   $('#resetBtn').hide();
-  $('#savePositionBtn').hide();
+  $('#savePositionForm').hide();
+  $('#startBtn').hide();
   $('#exitTestingBtn').show();
   
   testing = true;
@@ -106,8 +118,7 @@ function exitTestingPosition() {
 }
 
 function exitTestingMode() {
-  $('#resetBtn').show();
-  $('#savePositionBtn').show();
+  $('#startBtn').show();
   $('#exitTestingBtn').hide();
   
   currentPosition = [];
