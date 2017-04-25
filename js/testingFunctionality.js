@@ -15,17 +15,24 @@ var selected = document.getElementById('selectPosition');
 var startingBoardPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
 
-$('#currentTestingLabel').hide();
-$('#saveForm').hide();
-$('#positionForm').hide();
-$('#exitTestingBtn').hide();
-$('#resetBtn').hide();
-$('#testBtn').hide();
-$('#deleteBtn').hide();
-
+initializeBtns();
 
 if ( localStorage.length > 0 ) {
   listSavedOpenings();
+}
+
+
+function initializeBtns() {
+  $('#currentTestingLabel').hide();
+  $('#saveForm').hide();
+  $('#positionForm').hide();
+  $('#exitTestingBtn').hide();
+  $('#resetBtn').hide();
+  $('#startBtn').show();
+  $('#deleteOpeningBtn').show();
+  $('#testOpeningBtn').show();
+  $('#testBtn').hide();
+  $('#deleteBtn').hide();
 }
 
 function listSavedOpenings() {
@@ -169,35 +176,10 @@ function exitTestingPosition() {
 }
 
 function exitTestingMode() {
-  $('#currentTestingLabel').hide();
-  $('#saveForm').hide();
-  $('#positionForm').hide();
-  $('#exitTestingBtn').hide();
-  $('#resetBtn').hide();
-  $('#startBtn').show();
-  $('#deleteOpeningBtn').show();
-  $('#testOpeningBtn').show();
-  $('#testBtn').hide();
-  $('#deleteBtn').hide();
+  initializeBtns();
   
   currentPosition = [];
   board.position(startingBoardPosition);
   
   exitTestingPosition();
 }
-
-
-/*
-
-$('#currentTestingLabel').hide();
-$('#saveForm').hide();
-$('#positionForm').hide();
-$('#exitTestingBtn').hide();
-$('#resetBtn').hide();
-$('#startBtn').hide();
-$('#deleteOpeningBtn').hide();
-$('#testOpeningBtn').hide();
-$('#testBtn').hide();
-$('#deleteBtn').hide();
-
-*/
