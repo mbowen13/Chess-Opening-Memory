@@ -66,16 +66,19 @@ function savePosition() {
   document.getElementById('positionName').value = "";
   
   if ( key !== null && key !== "" ) {
-    // positionsObj[key] = currentPosition;
-    localStorage.setItem(key, currentPosition);
+    if ( !localStorage.hasOwnProperty(key) ) {
+      localStorage.setItem(key, currentPosition);
+      
+      currentPosition = [];
     
-    currentPosition = [];
-  
-    board.position(startingBoardPosition);
-    
-    $('#loadTestingPositionForm').show();
-    
-    $('select').append('<option value="' + key + '">' + key + '</option>');
+      board.position(startingBoardPosition);
+      
+      $('#loadTestingPositionForm').show();
+      
+      $('select').append('<option value="' + key + '">' + key + '</option>');
+    } else {
+      throw alert("That name already exists.");
+    }
   } else {
     throw alert("You must enter a name for your position.");
   }
