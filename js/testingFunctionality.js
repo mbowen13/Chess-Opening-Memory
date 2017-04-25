@@ -7,7 +7,6 @@ var cfg = {
 
 var board = ChessBoard('board', cfg);
 var currentPosition = [];
-var positionsObj = {};
 var testing = false;
 var currentTestingIndex = 0;
 var currentTestingArr = [];
@@ -45,10 +44,10 @@ function listSavedOpenings() {
 
 function onDrop(source, target, piece, newPos, oldPos, orientation) {
   if (testing) {
-     console.log("You played: " + ChessBoard.objToFen(newPos));
-     console.log("The correct move is: " + currentTestingArr[currentTestingIndex]);
+     // console.log("You played: " + ChessBoard.objToFen(newPos));
+     // console.log("The correct move is: " + currentTestingArr[currentTestingIndex]);
     if ( ChessBoard.objToFen(newPos) !== currentTestingArr[currentTestingIndex]) {
-      alert('That is incorrect.Try again');
+      // alert('That is incorrect.Try again');
       return 'snapback';
     } 
     else if (currentTestingIndex == currentTestingArr.length - 1) {
@@ -76,6 +75,9 @@ function start() {
   $('#deleteBtn').hide();
   
   board.position(startingBoardPosition);
+  
+  currentPosition = [];
+  
 }
 
 function savePosition() {
