@@ -7,6 +7,12 @@ Features:
 - Create your own openings with the interactive chess board. 
 - Create a deck (like a flashcard deck) of chess openings that you want to memorize.
 
+Try It Out!:
+- https://srchess.herokuapp.com/
+
+Note:
+- jQuery manipulates the DOM, which does not integrate well with modern Front-end frameworks. Keep that in mind if you wish to extend this into an SPA
+
 
 image
 
