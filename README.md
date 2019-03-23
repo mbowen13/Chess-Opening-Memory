@@ -12,6 +12,7 @@ Try It Out!:
 
 Note:
 - jQuery manipulates the DOM, which does not integrate well with modern Front-end frameworks. Keep that in mind if you wish to extend this into an SPA
+- All data is persisted locally on the client, which is not great for data persistence. If you want to extend this MVP, contemplate using a BaaS like FireBase or create a backend to persist data in a database. 
 
 
 image
